@@ -75,6 +75,7 @@ class ProjectsController < ApplicationController
     end
 
     def require_admin
-      render status: 404
+      # TODO: implement admin
+      redirect_to root_path
     end
 end

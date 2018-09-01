@@ -58,40 +58,30 @@ RSpec.describe ProjectsController, type: :controller do
   
   describe 'GET new' do
     context 'when admin logged in' do
-      it 'renders the template' do
-        get :new
-
-        expect(response).to render_template(:new)
-      end
-
+      it 'renders the template'
       it 'assigns @project'
     end
 
     context 'when admin not logged in' do
-      it 'returns 404 error code' do
-        get :new
+      it 'redirects to root_path' do
+        get :edit, :params => { id: project }
 
-        expect(response.status).to eq(404)
+        expect(response).to redirect_to(root_path) 
       end
     end
   end
 
   describe 'GET edit' do
     context 'when admin logged in' do
-      it 'renders the template' do
-        get :edit, :params => { id: project }
-
-        expect(response).to render_template(:edit)
-      end
-
+      it 'renders the template'
       it 'assigns @project'
     end
 
     context 'when admin not logged in' do
-      it 'returns 404 error code' do
+      it 'redirects to root_path' do
         get :edit, :params => { id: project }
 
-        expect(response.status).to eq(404)
+        expect(response).to redirect_to(root_path) 
       end
     end
   end
@@ -101,7 +91,11 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     context 'when admin not logged in' do
-      it 'returns 400 error code'
+      it 'redirects to root_path' do
+        get :edit, :params => { id: project }
+
+        expect(response).to redirect_to(root_path) 
+      end
     end
   end
 
@@ -110,7 +104,11 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     context 'when admin not logged in' do
-      it 'returns 400 error code'
+      it 'redirects to root_path' do
+        get :edit, :params => { id: project }
+
+        expect(response).to redirect_to(root_path) 
+      end
     end
   end
 
@@ -119,7 +117,11 @@ RSpec.describe ProjectsController, type: :controller do
     end
 
     context 'when admin not logged in' do
-      it 'returns 400 error code'
+      it 'redirects to root_path' do
+        get :edit, :params => { id: project }
+
+        expect(response).to redirect_to(root_path) 
+      end
     end
   end
 end
