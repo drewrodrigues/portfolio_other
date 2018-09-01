@@ -34,6 +34,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rspec-rails', '~> 3.7'
+  gem 'factory_bot'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
