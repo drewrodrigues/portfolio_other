@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   before_action :redirect_if_logged_in!, only: [:new, :create]
+  before_action :require_login!, only: :dashboard
 
   # GET /dashboard
   def dashboard
@@ -34,17 +35,5 @@ class AdminController < ApplicationController
   def admin_authenticate 
     return params['username'] == ENV['portfolio_admin_username'] &&
            params['password'] == ENV['portfolio_admin_password']
-  end
-
-  def login
-    session[:admin] = true
-  end
-
-  def logout
-    session.delete :admin
-  end
-
-  def logged_in?
-    session[:admin]
   end
 end

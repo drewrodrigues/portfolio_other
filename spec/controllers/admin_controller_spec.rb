@@ -1,10 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe AdminController, type: :controller do
+  describe 'GET dashboard' do
+    context 'admin logged in' do
+      it 'renders the template' do
+        controller.login 
+
+        get :dashboard
+
+        expect(response).to render_template :dashboard
+      end
+    end
+
+    context 'admin not logged in' do
+      it 'redirects to login' do
+        get :dashboard
+
+        expect(response).to redirect_to login_path
+      end
+    end
+  end
+
   describe 'GET new' do
     context 'admin logged in' do
       it 'redirects to dashboard' do
-        login_admin
+        controller.login
 
         get :new
 
@@ -24,7 +44,7 @@ RSpec.describe AdminController, type: :controller do
   describe 'POST create' do
     context 'admin logged in' do
       it 'redirects to dashboard' do
-        login_admin
+        controller.login
 
         post :create
 
@@ -69,7 +89,7 @@ RSpec.describe AdminController, type: :controller do
   describe 'DELETE destroy' do
     context 'admin logged in' do
       it 'redirects to root' do
-        login_admin 
+        controller.login 
 
         delete :destroy
 
@@ -77,7 +97,7 @@ RSpec.describe AdminController, type: :controller do
       end
 
       it 'clears the session' do
-        login_admin
+        controller.login
 
         delete :destroy
 
@@ -93,10 +113,5 @@ RSpec.describe AdminController, type: :controller do
       end
     end
   end
-
-  private
-
-  def login_admin
-    session[:admin] = true  
-  end
 end
+
