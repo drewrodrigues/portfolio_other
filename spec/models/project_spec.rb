@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Project, type: :model do
   let(:project) { build(:project) }
@@ -8,7 +8,7 @@ RSpec.describe Project, type: :model do
   it { is_expected.to validate_presence_of(:specifications) }
   it { is_expected.to validate_presence_of(:details) }
 
-  it 'has a valid factory' do
+  it "has a valid factory" do
     expect(project.valid?).to eq(true)
   end
 end
