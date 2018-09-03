@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
-  helper_method :logged_in?
+  include ApplicationHelper
+
+  def require_login!
+    redirect_to login_path unless logged_in?
+  end
 
   def login
     session[:admin] = true
@@ -7,13 +11,5 @@ class ApplicationController < ActionController::Base
 
   def logout
     session.delete :admin
-  end
-
-  def logged_in?
-    session[:admin]
-  end
-
-  def require_login!
-    redirect_to login_path unless logged_in?
   end
 end
